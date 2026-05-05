@@ -1,0 +1,1088 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Horizonte · Inmobiliaria Premium</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+/* ===== TOKENS ===== */
+:root {
+  --ink:        #f8f7f4;
+  --ink2:       #ffffff;
+  --ink3:       #f1efe9;
+  --surface:    rgba(0,0,0,0.04);
+  --surface2:   rgba(0,0,0,0.07);
+  --border:     rgba(0,0,0,0.09);
+  --border2:    rgba(0,0,0,0.15);
+  --gold:       #9a6f2e;
+  --gold2:      #7a5420;
+  --gold-dim:   rgba(154,111,46,0.1);
+  --gold-glow:  rgba(154,111,46,0.22);
+  --text:       #1a1714;
+  --text2:      #5a5248;
+  --text3:      #9a9088;
+  --radius:     14px;
+  --radius-lg:  20px;
+  --serif:      'Playfair Display', Georgia, serif;
+  --sans:       'Outfit', system-ui, sans-serif;
+  --shadow:     0 8px 32px rgba(0,0,0,0.1);
+  --shadow-lg:  0 24px 64px rgba(0,0,0,0.14);
+}
+
+/* ===== RESET ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{
+  font-family:var(--sans);
+  background:var(--ink);
+  color:var(--text);
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none;}
+img{display:block;width:100%;}
+button{font-family:inherit;cursor:pointer;border:none;background:none;}
+
+/* ===== NOISE OVERLAY ===== */
+body::before{
+  content:"";
+  position:fixed;inset:0;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity:0.35;
+  pointer-events:none;
+}
+
+/* ===== NAVBAR ===== */
+.navbar{
+  position:fixed;top:0;left:0;right:0;z-index:200;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;height:70px;
+  background:rgba(248,247,244,0.82);
+  backdrop-filter:blur(20px);
+  border-bottom:1px solid var(--border);
+  transition:background 0.3s;
+}
+.nav-brand{
+  display:flex;align-items:center;gap:10px;
+}
+.nav-mark{
+  width:36px;height:36px;
+  border:1.5px solid var(--gold);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-size:18px;font-weight:700;
+  color:var(--gold);
+}
+.nav-wordmark{
+  font-family:var(--serif);font-size:18px;font-weight:600;
+  letter-spacing:0.06em;
+  color:var(--text);
+}
+.nav-wordmark span{color:var(--gold);}
+.nav-links{display:flex;align-items:center;gap:32px;}
+.nav-link{
+  font-size:15px;font-weight:500;
+  color:var(--text2);letter-spacing:0.02em;
+  transition:color 0.2s;
+}
+.nav-link:hover{color:var(--text);}
+.nav-cta{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 22px;
+  border:1px solid var(--gold);
+  color:var(--gold);
+  font-size:15px;font-weight:600;
+  border-radius:8px;
+  letter-spacing:0.02em;
+  transition:background 0.2s,color 0.2s;
+}
+.nav-cta:hover{background:var(--gold);color:#fff;}
+
+/* ===== HERO ===== */
+.hero{
+  position:relative;
+  min-height:100svh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  overflow:hidden;
+}
+
+/* Left panel */
+.hero-left{
+  display:flex;flex-direction:column;justify-content:center;
+  padding:120px 56px 80px 80px;
+  position:relative;z-index:1;
+}
+.hero-eyebrow{
+  display:flex;align-items:center;gap:12px;
+  margin-bottom:24px;
+}
+.hero-eyebrow-line{
+  width:32px;height:1px;background:var(--gold);
+}
+.hero-eyebrow span{
+  font-size:11px;font-weight:600;letter-spacing:0.18em;
+  text-transform:uppercase;color:var(--gold);
+}
+.hero-h1{
+  font-family:var(--serif);
+  font-size:clamp(44px,5.5vw,74px);
+  font-weight:700;
+  line-height:1.02;
+  letter-spacing:-0.02em;
+  margin-bottom:24px;
+}
+.hero-h1 em{
+  font-style:italic;
+  color:var(--gold);
+  display:block;
+}
+.hero-sub{
+  font-size:18px;color:var(--text2);
+  line-height:1.75;max-width:44ch;
+  margin-bottom:40px;
+}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;}
+.btn-gold{
+  display:inline-flex;align-items:center;gap:10px;
+  padding:14px 28px;
+  background:var(--gold);color:var(--ink);
+  font-size:14px;font-weight:700;
+  border-radius:10px;letter-spacing:0.03em;
+  transition:background 0.2s,transform 0.15s,box-shadow 0.2s;
+  box-shadow:0 4px 20px var(--gold-glow);
+}
+.btn-gold:hover{
+  background:var(--gold2);
+  transform:translateY(-2px);
+  box-shadow:0 8px 32px var(--gold-glow);
+}
+.btn-outline{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:14px 24px;
+  border:1px solid var(--border2);
+  background:var(--surface);
+  color:var(--text);
+  font-size:14px;font-weight:500;
+  border-radius:10px;
+  transition:border-color 0.2s,background 0.2s;
+}
+.btn-outline:hover{
+  border-color:rgba(255,255,255,0.28);
+  background:var(--surface2);
+}
+
+/* Floating stats */
+.hero-stats{
+  display:flex;gap:0;
+  margin-top:56px;
+  border:1px solid var(--border);
+  border-radius:14px;
+  overflow:hidden;
+  width:fit-content;
+  background:var(--surface);
+  backdrop-filter:blur(12px);
+}
+.hero-stat{
+  padding:16px 28px;
+  border-right:1px solid var(--border);
+  display:flex;flex-direction:column;gap:3px;
+}
+.hero-stat:last-child{border-right:none;}
+.stat-n{
+  font-family:var(--serif);font-size:22px;font-weight:700;
+  color:var(--gold);
+}
+.stat-l{font-size:11px;color:var(--text3);letter-spacing:0.06em;text-transform:uppercase;}
+
+/* Right panel */
+.hero-right{
+  position:relative;overflow:hidden;
+}
+.hero-right-img{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(to right,var(--ink) 0%,transparent 15%),
+    linear-gradient(to top,var(--ink) 0%,transparent 30%),
+    url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1200&q=80') center/cover;
+}
+.hero-tag{
+  position:absolute;bottom:48px;left:-20px;
+  background:rgba(255,255,255,0.92);
+  backdrop-filter:blur(12px);
+  border:1px solid var(--border2);
+  border-radius:14px;
+  padding:18px 24px;
+  z-index:2;
+  min-width:200px;
+}
+.hero-tag-label{font-size:10px;letter-spacing:0.12em;text-transform:uppercase;color:var(--text3);margin-bottom:6px;}
+.hero-tag-title{font-family:var(--serif);font-size:16px;color:var(--text);margin-bottom:2px;}
+.hero-tag-price{font-size:13px;font-weight:600;color:var(--gold);}
+
+/* ===== SEARCH BAR ===== */
+.search-section{
+  position:relative;z-index:10;
+  padding:0 80px;
+  margin-top:-36px;
+}
+.search-bar{
+  background:#ffffff;
+  border:1px solid var(--border2);
+  border-radius:16px;
+  padding:24px 28px;
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr auto;
+  gap:16px;
+  align-items:end;
+  box-shadow:var(--shadow);
+}
+.search-field{display:flex;flex-direction:column;gap:6px;}
+.search-field label{
+  font-size:12px;font-weight:600;
+  letter-spacing:0.1em;text-transform:uppercase;
+  color:var(--text3);
+}
+.search-field select,
+.search-field input{
+  background:var(--ink3);
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:11px 14px;
+  font-family:var(--sans);font-size:15px;
+  color:var(--text);
+  outline:none;
+  transition:border-color 0.2s;
+  -webkit-appearance:none;appearance:none;
+}
+.search-field select:focus,
+.search-field input:focus{border-color:var(--gold);}
+.search-field select option{background:#fff;color:var(--text);}
+.search-btn{
+  display:flex;align-items:center;gap:10px;
+  padding:12px 24px;
+  background:var(--gold);color:var(--ink);
+  font-size:14px;font-weight:700;
+  border-radius:10px;white-space:nowrap;
+  letter-spacing:0.02em;
+  transition:background 0.2s,transform 0.15s;
+}
+.search-btn:hover{background:var(--gold2);transform:translateY(-1px);}
+
+/* ===== PROPERTIES SECTION ===== */
+.props-section{
+  padding:80px 80px 64px;
+  position:relative;z-index:1;
+}
+.section-header{
+  display:flex;justify-content:space-between;align-items:flex-end;
+  margin-bottom:40px;
+}
+.section-kicker{
+  font-size:11px;font-weight:600;letter-spacing:0.16em;
+  text-transform:uppercase;color:var(--gold);
+  margin-bottom:10px;display:block;
+}
+.section-title{
+  font-family:var(--serif);
+  font-size:clamp(28px,3.5vw,40px);
+  font-weight:700;line-height:1.1;
+  letter-spacing:-0.02em;
+}
+.section-title em{font-style:italic;color:var(--gold);}
+.section-link{
+  font-size:13px;font-weight:600;
+  color:var(--gold);letter-spacing:0.04em;
+  display:flex;align-items:center;gap:6px;
+  border-bottom:1px solid var(--gold-dim);
+  padding-bottom:2px;
+  transition:border-color 0.2s;
+}
+.section-link:hover{border-color:var(--gold);}
+
+/* Filter tabs */
+.filter-tabs{
+  display:flex;gap:8px;margin-bottom:32px;flex-wrap:wrap;
+}
+.filter-tab{
+  padding:8px 18px;
+  border:1px solid var(--border);
+  border-radius:999px;
+  font-size:13px;font-weight:500;
+  color:var(--text2);
+  transition:all 0.2s;
+}
+.filter-tab:hover,.filter-tab.active{
+  border-color:var(--gold);
+  color:var(--gold);
+  background:var(--gold-dim);
+}
+
+/* Property grid */
+.prop-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+
+/* Property card */
+.prop-card{
+  background:var(--ink2);
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  overflow:hidden;
+ 
+  
+  mask-image:radial-gradient(white,black);
+  transition:transform 0.3s,box-shadow 0.3s,border-color 0.3s;
+  cursor:pointer;
+  position:relative;
+}
+.prop-card:hover{
+  transform:translateY(-6px);
+  box-shadow:var(--shadow-lg);
+  border-color:var(--border2);
+}
+.prop-card-img{
+  position:relative;
+  height:220px;
+  overflow:hidden;
+  
+  display:block;
+}
+.prop-card-img img{
+  
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center;
+  -webkit-transform:translateZ(0);
+  transform:translateZ(0);
+  transition:transform 0.5s;
+}
+.prop-card:hover .prop-card-img img{
+  transform:scale(1.06) translateZ(0);
+}
+.prop-card-badge{
+  position:absolute;top:14px;left:14px;
+  padding:5px 12px;
+  border-radius:999px;
+  font-size:11px;font-weight:700;
+  letter-spacing:0.06em;text-transform:uppercase;
+  -webkit-backdrop-filter:blur(8px);
+  backdrop-filter:blur(8px);
+  z-index:2;
+}
+.badge-venta{background:rgba(154,111,46,0.9);color:#fff;}
+.badge-alquiler{background:rgba(30,30,40,0.75);color:white;border:1px solid rgba(255,255,255,0.2);}
+.badge-oport{background:rgba(220,38,38,0.88);color:white;}
+.prop-save{
+  position:absolute;top:12px;right:12px;
+  width:34px;height:34px;
+  background:rgba(255,255,255,0.85);
+  backdrop-filter:blur(6px);
+  border:1px solid var(--border2);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text2);
+  transition:color 0.2s,background 0.2s;
+}
+.prop-save:hover{color:var(--gold);background:#fff;}
+.prop-card-body{padding:20px 22px 22px;}
+.prop-price{
+  font-family:var(--serif);font-size:22px;font-weight:700;
+  color:var(--gold);margin-bottom:4px;
+}
+.prop-price span{font-size:14px;font-weight:400;color:var(--text3);margin-left:4px;}
+.prop-title{
+  font-size:17px;font-weight:600;color:var(--text);
+  margin-bottom:6px;line-height:1.35;
+}
+.prop-loc{
+  display:flex;align-items:center;gap:6px;
+  font-size:14px;color:var(--text2);margin-bottom:16px;
+}
+.prop-loc svg{flex-shrink:0;color:var(--text3);}
+.prop-features{
+  display:flex;gap:0;
+  border-top:1px solid var(--border);
+  padding-top:14px;
+}
+.prop-feat{
+  flex:1;display:flex;flex-direction:column;
+  align-items:center;gap:4px;
+  border-right:1px solid var(--border);
+  padding:0 12px;
+}
+.prop-feat:last-child{border-right:none;}
+.feat-val{font-size:15px;font-weight:600;color:var(--text);}
+.feat-key{font-size:11px;letter-spacing:0.08em;text-transform:uppercase;color:var(--text3);}
+
+/* ===== FEATURED / WIDE CARD ===== */
+.prop-card-wide{
+  grid-column:span 2;
+  display:grid;grid-template-columns:1.2fr 1fr;
+}
+.prop-card-wide .prop-card-img{
+  height:100%;
+  min-height:260px;
+  overflow:hidden;
+  
+}
+.prop-card-wide .prop-card-body{
+  display:flex;flex-direction:column;justify-content:space-between;
+  padding:28px 28px;
+}
+.prop-wide-desc{
+  font-size:15px;color:var(--text2);line-height:1.65;
+  margin-bottom:16px;
+}
+.btn-card{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:11px 20px;
+  border:1px solid var(--border2);
+  border-radius:8px;
+  font-size:14px;font-weight:600;color:var(--text);
+  transition:border-color 0.2s,background 0.2s;
+  width:fit-content;
+}
+.btn-card:hover{border-color:var(--gold);color:var(--gold);background:var(--gold-dim);}
+
+.why-section{
+  padding:80px;
+  background:var(--ink3);
+  border-top:1px solid var(--border);
+  border-bottom:1px solid var(--border);
+  position:relative;overflow:hidden;
+}
+.why-section::before{
+  content:"";position:absolute;
+  top:-200px;right:-200px;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:radial-gradient(circle,rgba(154,111,46,0.06),transparent 70%);
+  pointer-events:none;
+}
+.why-inner{
+  display:grid;grid-template-columns:1fr 1fr;
+  gap:80px;align-items:center;
+}
+.why-left .section-title{margin-bottom:16px;}
+.why-left p{
+  font-size:17px;color:var(--text2);line-height:1.75;
+  margin-bottom:28px;max-width:50ch;
+}
+.why-cta-group{display:flex;gap:12px;flex-wrap:wrap;}
+.why-grid{
+  display:grid;grid-template-columns:1fr 1fr;gap:16px;
+}
+.why-card{
+  background:rgba(255,255,255,0.7);
+  border:1px solid var(--border);
+  border-radius:var(--radius);
+  padding:22px;
+  transition:border-color 0.25s,background 0.25s;
+}
+.why-card:hover{border-color:var(--gold);background:#fff;}
+.why-icon{
+  width:44px;height:44px;
+  background:var(--gold-dim);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:14px;color:var(--gold);
+}
+.why-card h4{
+  font-family:var(--serif);font-size:18px;font-weight:600;
+  margin-bottom:6px;color:var(--text);
+}
+.why-card p{font-size:14px;color:var(--text2);line-height:1.6;}
+
+/* ===== DEMO CTA ===== */
+.demo-section{
+  padding:100px 80px;
+  text-align:center;
+  position:relative;overflow:hidden;
+}
+.demo-section::before{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 800px 500px at 50% 0%,rgba(154,111,46,0.06),transparent 65%);
+  pointer-events:none;
+}
+.demo-badge{
+  display:inline-block;
+  padding:6px 16px;
+  border:1px solid var(--border2);
+  border-radius:999px;
+  font-size:12px;font-weight:700;
+  letter-spacing:0.12em;text-transform:uppercase;
+  color:var(--text2);
+  margin-bottom:24px;
+}
+.demo-title{
+  font-family:var(--serif);
+  font-size:clamp(32px,5vw,58px);
+  font-weight:700;line-height:1.05;
+  letter-spacing:-0.02em;
+  margin-bottom:18px;
+}
+.demo-title em{font-style:italic;color:var(--gold);}
+.demo-sub{
+  font-size:18px;color:var(--text2);line-height:1.7;
+  max-width:52ch;margin:0 auto 36px;
+}
+.demo-actions{
+  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
+}
+.demo-note{
+  margin-top:20px;
+  font-size:12px;color:var(--text3);letter-spacing:0.04em;
+}
+
+/* ===== FOOTER ===== */
+.footer{
+  padding:32px 80px;
+  border-top:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  flex-wrap:wrap;gap:16px;
+}
+.footer-copy{font-size:13px;color:var(--text3);}
+.footer-by{
+  font-size:12px;color:var(--text3);
+  display:flex;align-items:center;gap:6px;
+}
+.footer-by a{color:var(--gold);font-weight:600;}
+.footer-by a:hover{color:var(--gold2);}
+
+/* Modal overlay */
+.modal-overlay{
+  position:fixed;inset:0;z-index:500;
+  background:rgba(5,7,10,0.85);
+  backdrop-filter:blur(12px);
+  display:flex;align-items:center;justify-content:center;
+  padding:24px;
+  animation:fadein 0.25s ease;
+}
+@keyframes fadein{from{opacity:0;}to{opacity:1;}}
+.modal{
+  background:#ffffff;
+  border:1px solid var(--border2);
+  border-radius:var(--radius-lg);
+  width:100%;max-width:640px;
+  max-height:90svh;overflow-y:auto;
+  animation:slideup 0.3s cubic-bezier(0.22,1,0.36,1);
+}
+@keyframes slideup{from{transform:translateY(32px);opacity:0;}to{transform:translateY(0);opacity:1;}}
+.modal-img{height:240px;overflow:hidden;border-radius:var(--radius-lg) var(--radius-lg) 0 0;}
+.modal-img img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;-webkit-transform:translateZ(0);transform:translateZ(0);}
+.modal-body{padding:28px 32px 32px;}
+.modal-kicker{
+  font-size:11px;font-weight:700;letter-spacing:0.12em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:8px;display:block;
+}
+.modal-title{
+  font-family:var(--serif);font-size:26px;font-weight:700;
+  margin-bottom:6px;line-height:1.15;
+}
+.modal-price{font-family:var(--serif);font-size:20px;color:var(--gold);margin-bottom:16px;}
+.modal-desc{font-size:15px;color:var(--text2);line-height:1.7;margin-bottom:20px;}
+.modal-feats{
+  display:flex;gap:12px;flex-wrap:wrap;margin-bottom:24px;
+}
+.modal-feat{
+  padding:8px 16px;
+  background:var(--ink3);
+  border:1px solid var(--border);
+  border-radius:8px;
+  font-size:14px;color:var(--text2);
+}
+.modal-actions{display:flex;gap:12px;flex-wrap:wrap;}
+.modal-close{
+  position:absolute;top:14px;right:14px;
+  width:36px;height:36px;
+  background:rgba(255,255,255,0.85);
+  border:1px solid var(--border2);
+  border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  color:var(--text2);
+  transition:color 0.2s,background 0.2s;
+}
+.modal-close:hover{color:var(--text);background:#fff;}
+.modal-inner-wrap{position:relative;}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px;}
+::-webkit-scrollbar-track{background:var(--ink3);}
+::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px;}
+
+/* RESPONSIVE */
+@media(max-width:1100px){
+  .prop-grid{grid-template-columns:repeat(2,1fr);}
+  .prop-card-wide{grid-column:span 2;}
+}
+@media(max-width:900px){
+  .navbar{padding:0 24px;}
+  .nav-links .nav-link{display:none;}
+  .hero{grid-template-columns:1fr;}
+  .hero-right{display:none;}
+  .hero-left{padding:120px 24px 60px;}
+  .search-section{padding:0 24px;}
+  .search-bar{grid-template-columns:1fr 1fr;gap:12px;}
+  .props-section,.why-section,.demo-section{padding:60px 24px;}
+  .prop-grid{grid-template-columns:1fr;}
+  .prop-card-wide{grid-column:span 1;display:block;}
+  .prop-card-wide .prop-card-img{height:220px;}
+  .why-inner{grid-template-columns:1fr;gap:48px;}
+  .footer{padding:24px;}
+}
+@media(max-width:600px){
+  .search-bar{grid-template-columns:1fr;}
+  .why-grid{grid-template-columns:1fr;}
+  .hero-stats{flex-direction:column;width:100%;}
+  .hero-stat{border-right:none;border-bottom:1px solid var(--border);}
+  .hero-stat:last-child{border-bottom:none;}
+  .hero-h1{font-size:38px;}
+}
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<header class="navbar" id="navbar">
+  <div class="nav-brand">
+    <div class="nav-mark">H</div>
+    <span class="nav-wordmark">HORIZON<span>TE</span></span>
+  </div>
+  <nav class="nav-links">
+    <a href="#propiedades" class="nav-link">Propiedades</a>
+    <a href="#nosotros" class="nav-link">Nosotros</a>
+    <a href="#contacto" class="nav-link">Contacto</a>
+    <a href="https://wa.me/542324477661" target="_blank" class="nav-cta">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+  </nav>
+</header>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <span>Mercedes, Buenos Aires</span>
+    </div>
+    <h1 class="hero-h1">
+      Encontrá<br />tu próxima
+      <em>propiedad.</em>
+    </h1>
+    <p class="hero-sub">
+      Comprá, vendé o alquilá con asesoramiento real. Propiedades en Mercedes y la región, con experiencia, seriedad y trato personalizado.
+    </p>
+    <div class="hero-actions">
+      <a href="#propiedades" class="btn-gold">
+        Ver propiedades
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#contacto" class="btn-outline">Hablar con un asesor</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="stat-n">+80</span>
+        <span class="stat-l">propiedades</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-n">+10</span>
+        <span class="stat-l">años activos</span>
+      </div>
+      <div class="hero-stat">
+        <span class="stat-n">100%</span>
+        <span class="stat-l">reserva</span>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-right-img"></div>
+    <div class="hero-tag">
+      <div class="hero-tag-label">Destacada del mes</div>
+      <div class="hero-tag-title">Casa en Barrio Jardín</div>
+      <div class="hero-tag-price">USD 185.000</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEARCH ===== -->
+<div class="search-section">
+  <div class="search-bar">
+    <div class="search-field">
+      <label>Operación</label>
+      <select>
+        <option>Compra</option>
+        <option>Alquiler</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Tipo de propiedad</label>
+      <select>
+        <option>Todos</option>
+        <option>Casa</option>
+        <option>Departamento</option>
+        <option>Terreno</option>
+        <option>Local</option>
+        <option>Campo / Quinta</option>
+      </select>
+    </div>
+    <div class="search-field">
+      <label>Zona</label>
+      <input type="text" placeholder="Mercedes y alrededores" />
+    </div>
+    <button class="search-btn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      Buscar
+    </button>
+  </div>
+</div>
+
+<!-- ===== PROPIEDADES ===== -->
+<section class="props-section" id="propiedades">
+  <div class="section-header">
+    <div>
+      <span class="section-kicker">Propiedades</span>
+      <h2 class="section-title">Destacadas del <em>momento</em></h2>
+    </div>
+    <a href="#" class="section-link">
+      Ver todas
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+  </div>
+
+  <!-- Filter tabs -->
+  <div class="filter-tabs">
+    <button class="filter-tab active" onclick="filterProps(this,'all')">Todos</button>
+    <button class="filter-tab" onclick="filterProps(this,'venta')">En venta</button>
+    <button class="filter-tab" onclick="filterProps(this,'alquiler')">Alquiler</button>
+    <button class="filter-tab" onclick="filterProps(this,'oport')">Oportunidades</button>
+  </div>
+
+  <div class="prop-grid" id="propGrid">
+    <!-- Wide Featured Card -->
+    <article class="prop-card prop-card-wide" data-cat="venta" onclick="openModal(0)">
+      <div class="prop-card-img">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80" alt="Casa moderna" loading="lazy" />
+        <span class="prop-card-badge badge-venta">En venta</span>
+      </div>
+      <div class="prop-card-body">
+        <div class="prop-price">USD 220.000</div>
+        <div class="prop-title">Casa moderna con jardín y piscina · Barrio Los Fresnos</div>
+        <div class="prop-loc">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Mercedes, Buenos Aires
+        </div>
+        <p class="prop-wide-desc">Amplia casa de dos plantas con living comedor integrado, cocina equipada, piscina y jardín parquizado. Ideal para familia. Excelente estado de conservación.</p>
+        <div class="prop-features" style="margin-bottom:20px;">
+          <div class="prop-feat">
+            <span class="feat-val">4</span>
+            <span class="feat-key">Dorm.</span>
+          </div>
+          <div class="prop-feat">
+            <span class="feat-val">2</span>
+            <span class="feat-key">Baños</span>
+          </div>
+          <div class="prop-feat">
+            <span class="feat-val">280</span>
+            <span class="feat-key">m² cub.</span>
+          </div>
+          <div class="prop-feat">
+            <span class="feat-val">600</span>
+            <span class="feat-key">m² tot.</span>
+          </div>
+        </div>
+        <a href="#" class="btn-card" onclick="event.stopPropagation();openModal(0)">
+          Ver detalle
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+    </article>
+
+    <!-- Card 2 -->
+    <article class="prop-card" data-cat="alquiler" onclick="openModal(1)">
+      <div class="prop-card-img">
+        <img src="https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=700&q=80" alt="Departamento" loading="lazy" />
+        <span class="prop-card-badge badge-alquiler">Alquiler</span>
+        <button class="prop-save" onclick="event.stopPropagation()" title="Guardar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="prop-card-body">
+        <div class="prop-price">$320.000 <span>/ mes</span></div>
+        <div class="prop-title">Departamento 2 amb. · Centro</div>
+        <div class="prop-loc">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Mercedes, Av. 29
+        </div>
+        <div class="prop-features">
+          <div class="prop-feat"><span class="feat-val">2</span><span class="feat-key">Amb.</span></div>
+          <div class="prop-feat"><span class="feat-val">1</span><span class="feat-key">Baño</span></div>
+          <div class="prop-feat"><span class="feat-val">65</span><span class="feat-key">m²</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 3 -->
+    <article class="prop-card" data-cat="oport" onclick="openModal(2)">
+      <div class="prop-card-img">
+        <img src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700&q=80" alt="Campo" loading="lazy" />
+        <span class="prop-card-badge badge-oport">Oportunidad</span>
+        <button class="prop-save" onclick="event.stopPropagation()" title="Guardar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="prop-card-body">
+        <div class="prop-price">USD 95.000</div>
+        <div class="prop-title">Campo agrícola · 80 hectáreas</div>
+        <div class="prop-loc">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Acceso Sur, Mercedes
+        </div>
+        <div class="prop-features">
+          <div class="prop-feat"><span class="feat-val">80</span><span class="feat-key">Ha.</span></div>
+          <div class="prop-feat"><span class="feat-val">Agrícola</span><span class="feat-key">Uso</span></div>
+          <div class="prop-feat"><span class="feat-val">Escritura</span><span class="feat-key">Título</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 4 -->
+    <article class="prop-card" data-cat="venta" onclick="openModal(3)">
+      <div class="prop-card-img">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80" alt="Local" loading="lazy" />
+        <span class="prop-card-badge badge-venta">En venta</span>
+        <button class="prop-save" onclick="event.stopPropagation()" title="Guardar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="prop-card-body">
+        <div class="prop-price">USD 48.000</div>
+        <div class="prop-title">Local comercial · Zona peatonal</div>
+        <div class="prop-loc">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Mercedes, casco urbano
+        </div>
+        <div class="prop-features">
+          <div class="prop-feat"><span class="feat-val">90</span><span class="feat-key">m²</span></div>
+          <div class="prop-feat"><span class="feat-val">Comercial</span><span class="feat-key">Uso</span></div>
+          <div class="prop-feat"><span class="feat-val">Vitrina</span><span class="feat-key">Frente</span></div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Card 5 -->
+    <article class="prop-card" data-cat="venta" onclick="openModal(4)">
+      <div class="prop-card-img">
+        <img src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=80" alt="Terreno" loading="lazy" />
+        <span class="prop-card-badge badge-venta">En venta</span>
+        <button class="prop-save" onclick="event.stopPropagation()" title="Guardar">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+        </button>
+      </div>
+      <div class="prop-card-body">
+        <div class="prop-price">USD 28.000</div>
+        <div class="prop-title">Terreno en loteo · Barrio Nuevo</div>
+        <div class="prop-loc">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Mercedes, periferia
+        </div>
+        <div class="prop-features">
+          <div class="prop-feat"><span class="feat-val">450</span><span class="feat-key">m²</span></div>
+          <div class="prop-feat"><span class="feat-val">Residencial</span><span class="feat-key">Zona</span></div>
+          <div class="prop-feat"><span class="feat-val">Financ.</span><span class="feat-key">Opciones</span></div>
+        </div>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ===== WHY US ===== -->
+<section class="why-section" id="nosotros">
+  <div class="why-inner">
+    <div class="why-left">
+      <span class="section-kicker">Por qué elegirnos</span>
+      <h2 class="section-title">Trabajo con <em>criterio,</em><br />no con promesas.</h2>
+      <p>Más de una década acompañando a familias e inversores en Mercedes. Cada operación con transparencia, asesoramiento real y absoluta reserva.</p>
+      <div class="why-cta-group">
+        <a href="https://wa.me/542324477661" target="_blank" class="btn-gold">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          Consultar ahora
+        </a>
+        <a href="#propiedades" class="btn-outline">Ver propiedades</a>
+      </div>
+    </div>
+    <div class="why-grid">
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h4>Operaciones seguras</h4>
+        <p>Documentación verificada y asesoramiento legal en cada transacción.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        </div>
+        <h4>Respuesta rápida</h4>
+        <p>Te contactamos a la brevedad. Sin demoras, sin intermediarios.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h4>Trato personalizado</h4>
+        <p>Cada cliente es diferente. Escuchamos antes de recomendar.</p>
+      </div>
+      <div class="why-card">
+        <div class="why-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
+        </div>
+        <h4>Tasaciones precisas</h4>
+        <p>Valuamos tu propiedad con criterio real de mercado. Sin especulaciones.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== DEMO CTA ===== -->
+<section class="demo-section" id="contacto">
+  <div class="demo-badge">Para inmobiliarias</div>
+  <h2 class="demo-title">¿Querés una web<br /><em>así para tu negocio?</em></h2>
+  <p class="demo-sub">Esta es una demo de Pulso. Desarrollamos sitios web profesionales para inmobiliarias y agencias de la región. Claros, rápidos y pensados para generar consultas.</p>
+  <div class="demo-actions">
+    <a href="https://wa.me/542324477661" target="_blank" class="btn-gold">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Solicitar demo por WhatsApp
+    </a>
+    <a href="https://www.pulsowebstudio.com.ar" target="_blank" class="btn-outline">Ver más trabajos</a>
+  </div>
+  <p class="demo-note">Pulso · Desarrollo Web · Mercedes, Buenos Aires</p>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="nav-brand">
+    <div class="nav-mark">H</div>
+    <span class="nav-wordmark">HORIZON<span>TE</span></span>
+  </div>
+  <p class="footer-copy">© 2025 Inmobiliaria Horizonte · Mercedes, Buenos Aires</p>
+  <div class="footer-by">
+    Demo desarrollada por
+    <a href="https://wa.me/542324477661" target="_blank">Pulso Desarrollo Web</a>
+  </div>
+</footer>
+
+<!-- ===== MODAL ===== -->
+<div id="modal" class="modal-overlay" style="display:none;" onclick="closeModal(event)">
+  <div class="modal">
+    <div class="modal-inner-wrap">
+      <button class="modal-close" onclick="closeModal()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+      <div class="modal-img"><img id="modal-img" src="" alt="" /></div>
+      <div class="modal-body">
+        <span class="modal-kicker" id="modal-kicker"></span>
+        <h2 class="modal-title" id="modal-title"></h2>
+        <div class="modal-price" id="modal-price"></div>
+        <p class="modal-desc" id="modal-desc"></p>
+        <div class="modal-feats" id="modal-feats"></div>
+        <div class="modal-actions">
+          <a href="https://wa.me/542324477661" target="_blank" class="btn-gold">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            Consultar por WhatsApp
+          </a>
+          <button class="btn-outline" onclick="closeModal()">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const PROPS = [
+  {
+    img:"https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=80",
+    kicker:"Casa · En venta",title:"Casa moderna con jardín y piscina · Barrio Los Fresnos",
+    price:"USD 220.000",
+    desc:"Amplia casa de dos plantas con living comedor integrado, cocina equipada, piscina y jardín parquizado. 4 dormitorios, 2 baños completos, cochera cubierta para 2 vehículos. Excelente estado de conservación. Ideal para familia.",
+    feats:["4 dormitorios","2 baños","280 m² cubiertos","600 m² totales","Piscina","Cochera x2"]
+  },
+  {
+    img:"https://images.unsplash.com/photo-1522708323590-d24dbb6b0267?w=700&q=80",
+    kicker:"Departamento · Alquiler",title:"Departamento 2 ambientes · Centro",
+    price:"$320.000 / mes",
+    desc:"Departamento luminoso en pleno centro de Mercedes. Cocina integrada, baño completo, pisos de madera. Edificio con seguridad. Ideal para profesionales o pareja.",
+    feats:["2 ambientes","1 baño","65 m²","Piso 3°","Luminoso","Seguridad"]
+  },
+  {
+    img:"https://images.unsplash.com/photo-1500382017468-9049fed747ef?w=700&q=80",
+    kicker:"Campo · Oportunidad",title:"Campo agrícola · 80 hectáreas",
+    price:"USD 95.000",
+    desc:"Excelente campo agrícola sobre acceso principal. Tierra de alta productividad, escritura en regla, sin restricciones. Acceso todo tiempo. Ideal para soja, maíz o ganadería. Financiación posible.",
+    feats:["80 hectáreas","Uso agrícola","Escritura","Acceso todo tiempo","Financiación","Acceso Sur"]
+  },
+  {
+    img:"https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=700&q=80",
+    kicker:"Local · En venta",title:"Local comercial · Zona peatonal",
+    price:"USD 48.000",
+    desc:"Local a estrenar en zona de alto tránsito peatonal. Vidrieras amplias, depósito, baño. Excelente visibilidad y accesibilidad. Apto para cualquier rubro comercial.",
+    feats:["90 m²","Uso comercial","Vidriera","Depósito","Baño","Zona peatonal"]
+  },
+  {
+    img:"https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=80",
+    kicker:"Terreno · En venta",title:"Terreno en loteo · Barrio Nuevo",
+    price:"USD 28.000",
+    desc:"Terreno en barrio residencial en crecimiento. Todos los servicios en el perímetro. Dimensiones ideales para construcción de vivienda familiar. Financiación disponible. Escritura directa.",
+    feats:["450 m²","Residencial","Todos servicios","Escritura","Financiación","Barrio en crecimiento"]
+  }
+];
+
+function openModal(i){
+  const p=PROPS[i];
+  document.getElementById('modal-img').src=p.img;
+  document.getElementById('modal-kicker').textContent=p.kicker;
+  document.getElementById('modal-title').textContent=p.title;
+  document.getElementById('modal-price').textContent=p.price;
+  document.getElementById('modal-desc').textContent=p.desc;
+  const f=document.getElementById('modal-feats');
+  f.innerHTML=p.feats.map(x=>`<span class="modal-feat">${x}</span>`).join('');
+  document.getElementById('modal').style.display='flex';
+  document.body.style.overflow='hidden';
+}
+function closeModal(e){
+  if(!e||e.target===document.getElementById('modal')||e.currentTarget===document.querySelector('.modal-close')){
+    document.getElementById('modal').style.display='none';
+    document.body.style.overflow='';
+  }
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal({target:document.getElementById('modal')});});
+
+function filterProps(btn, cat){
+  document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#propGrid .prop-card').forEach(c=>{
+    if(cat==='all'||c.dataset.cat===cat){
+      c.style.display='';
+    } else {
+      c.style.display='none';
+    }
+  });
+}
+
+// Navbar scroll
+window.addEventListener('scroll',()=>{
+  const n=document.getElementById('navbar');
+  n.style.background=window.scrollY>30?'rgba(248,247,244,0.97)':'rgba(248,247,244,0.82)';
+},{passive:true});
+</script>
+</body>
+</html>
